@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuario")
@@ -18,7 +18,7 @@ public class usuario {
     @Id
     private String run;
 
-    @Column(name = "nom")
+    @Column
     private String nombre;
 
     @Column
@@ -32,6 +32,13 @@ public class usuario {
 
     @Column
     private int edad;
+
+    @Column(name = "fecha_nacimiento")
+      private LocalDate fechaNacimiento;
+
+    
+
+
     
 
 

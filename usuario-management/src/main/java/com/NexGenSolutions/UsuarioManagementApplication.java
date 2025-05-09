@@ -1,4 +1,4 @@
-package com.NexGenSolutions.usuario_management;
+package com.NexGenSolutions;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
