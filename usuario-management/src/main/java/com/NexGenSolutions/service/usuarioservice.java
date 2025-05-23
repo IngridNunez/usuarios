@@ -6,6 +6,7 @@ import com.NexGenSolutions.repository.usuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +17,15 @@ public class usuarioservice {
     @Autowired
     private usuarioRepository usuarioRepository;
     //obtiene todos los usuarios
-    public List<usuario> findAll(){
-        return usuarioRepository.findAll();
+    public List<usuario> findAll(int run){
+        List<usuario> usrs =  usuarioRepository.findAll();
+        usuario user = findById(run);
+        if user.getRole().equals("Administrador"){
+            return usrs;
+        }
+        else{
+            return new ResponseEntity<Object>("Acceso no autorizado", HttpStatus.UNAUTORIZED);
+        }
     }
 
     // Busca un usuario por run 

@@ -53,11 +53,10 @@ public class usuarioController {
     }
     //obtener todos los usuarios si esta vacia responde con 204NoConect y si hay usuarios responde con 200Ok
     @GetMapping
-    public ResponseEntity<List<usuario>>listar(){
-        List<usuario> usuario = usuarioservice.findAll();
+    public ResponseEntity<List<usuario>>listar(@PathVariable int run){
+        List<usuario> usuario = usuarioservice.findAll(run);
         if(usuario.isEmpty()){
             return ResponseEntity.noContent().build();
-
         }
         return ResponseEntity.ok(usuario);
    

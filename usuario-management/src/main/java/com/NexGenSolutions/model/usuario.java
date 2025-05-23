@@ -34,7 +34,6 @@ public class usuario {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @Enumerated(EnumType.STRING) // Almacena el rol como texto en la base de datos
     @Column(nullable = false)
     private String role; // Nuevo atributo para el rol del usuario
 }
