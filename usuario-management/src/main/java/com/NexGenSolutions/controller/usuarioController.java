@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.NexGenSolutions.exeption.UnautorizedExeption;
 import com.NexGenSolutions.model.usuario;
 import com.NexGenSolutions.service.usuarioservice;
 
@@ -52,13 +53,24 @@ public class usuarioController {
         }
     }
     //obtener todos los usuarios si esta vacia responde con 204NoConect y si hay usuarios responde con 200Ok
+
+
     @GetMapping
-    public ResponseEntity<List<usuario>>listar(@PathVariable int run){
-        List<usuario> usuario = usuarioservice.findAll(run);
-        if(usuario.isEmpty()){
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<?> listar(@RequestBody usuario admin){
+        List<usuario> usuario;
+        try {
+            usuario = usuarioservice.findAll(admin.getRun());
+            if(usuario.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(usuario);
+        } catch (UnautorizedExeption e) {
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.UNAUTHORIZED);
         }
-        return ResponseEntity.ok(usuario);
+        catch(RuntimeException e){
+            return new ResponseEntity<Object>("No existe el usuario Admin",HttpStatus.NOT_FOUND);
+        }
+        
    
 
 

@@ -1,12 +1,12 @@
 package com.NexGenSolutions.service;
 
+import com.NexGenSolutions.exeption.UnautorizedExeption;
 import com.NexGenSolutions.model.usuario;
 import com.NexGenSolutions.repository.usuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,19 +17,19 @@ public class usuarioservice {
     @Autowired
     private usuarioRepository usuarioRepository;
     //obtiene todos los usuarios
-    public List<usuario> findAll(int run){
+    public List<usuario> findAll(Integer run) throws UnautorizedExeption, RuntimeException{
         List<usuario> usrs =  usuarioRepository.findAll();
         usuario user = findById(run);
-        if user.getRole().equals("Administrador"){
+        if (user.getRole().equals("Administrador")){
             return usrs;
         }
         else{
-            return new ResponseEntity<Object>("Acceso no autorizado", HttpStatus.UNAUTORIZED);
+            throw new UnautorizedExeption("Acceso no autorizado");
         }
     }
 
     // Busca un usuario por run 
-    public usuario findById(int run) {
+    public usuario findById(int run) throws RuntimeException{
         Optional<usuario> usuarioOpt = usuarioRepository.findById(run); // Busca y puede no encontrar
         if (usuarioOpt.isPresent()) {
             return usuarioOpt.get(); 
