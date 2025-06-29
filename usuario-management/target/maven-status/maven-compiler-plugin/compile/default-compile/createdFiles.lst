@@ -1,0 +1,9 @@
+com\NexGenSolutions\model\usuario.class
+com\NexGenSolutions\controller\usuarioController.class
+com\NexGenSolutions\config\OpenApiConfig.class
+com\NexGenSolutions\controller\Role.class
+com\NexGenSolutions\repository\usuarioRepository.class
+com\NexGenSolutions\UsuarioManagementApplication.class
+com\NexGenSolutions\controller\usuarioController$1.class
+com\NexGenSolutions\exeption\UnautorizedExeption.class
+com\NexGenSolutions\service\usuarioservice.class
